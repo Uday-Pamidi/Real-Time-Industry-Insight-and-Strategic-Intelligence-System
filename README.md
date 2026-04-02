@@ -64,9 +64,4 @@ Advanced predictive analytics
 User authentication
 Cloud deployment
 
-## Author
-Kanaparthy Madhumita
-
-## License
-MIT License
 

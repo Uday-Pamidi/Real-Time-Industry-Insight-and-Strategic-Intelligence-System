@@ -64,4 +64,14 @@ Advanced predictive analytics
 User authentication
 Cloud deployment
 
+## Author
 
+Developed by Group-1 under Infosys Springboard Initiative.
+
+## Project
+
+Real-Time Industry Insight & Strategic Intelligence System
+
+## License
+
+MIT License

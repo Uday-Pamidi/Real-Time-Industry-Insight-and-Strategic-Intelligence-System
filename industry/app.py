@@ -662,7 +662,7 @@ if st.session_state.get("ok"):
 
             # ── 2. DONUT CHART ─────────────────────────────
             total = sum(counts)
-            percentages = [round((c / total) * 100, 1) for c in counts]
+            percentages = [round((c / total) * 100, 1) if total > 0 else 0 for c in counts]
 
             fig_donut = go.Figure(data=[go.Pie(
                 labels=brands_list,

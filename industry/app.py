@@ -7,7 +7,6 @@ import os
 # ── Path & env setup ────────────────────────────────────────────────────────
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from dotenv import load_dotenv
-from dotenv import load_dotenv
 load_dotenv()
 
 from fastmcp import Client
@@ -26,7 +25,7 @@ def get_secret(key):
         return os.getenv(key)
 def llm_call(prompt):
     hf_token = get_secret("HF_TOKEN")
-    groq_key = get_secret("GROQ_API_KEY")
+    groq_key = get_secret("GROQ_KEY")
     if hf_token:
         try:
             client = InferenceClient(

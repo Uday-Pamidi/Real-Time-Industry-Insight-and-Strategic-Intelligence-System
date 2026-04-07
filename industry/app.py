@@ -35,7 +35,7 @@ def llm_call(prompt):
             response = client.chat.completions.create(
                 model="meta-llama/Llama-3.1-8B-Instruct",
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=400,
+                max_tokens=1000,
                 temperature=0.7,
             )
             return response.choices[0].message.content
@@ -49,7 +49,7 @@ def llm_call(prompt):
             response = client.chat.completions.create(
                 model="llama-3.3-70b-versatile", 
                 messages=[{"role": "user", "content": prompt}],
-                max_tokens=400,
+                max_tokens=1000,
                 temperature=0.7,
             )
             return response.choices[0].message.content
@@ -61,10 +61,10 @@ def llm_call(prompt):
 
 def parse_ai_output(text):
     try:
-        summary = re.search(r"SUMMARY:\s*(.*)", text).group(1)
-        recommendation = re.search(r"RECOMMENDATION:\s*(.*)", text).group(1)
-        insight = re.search(r"INSIGHT:\s*(.*)", text).group(1)
-        confidence = re.search(r"CONFIDENCE:\s*(.*)", text).group(1)
+        summary = re.search(r"SUMMARY:\s*(.*?)RECOMMENDATION:", text, re.DOTALL | re.IGNORECASE).group(1).strip()
+        recommendation = re.search(r"RECOMMENDATION:\s*(.*?)INSIGHT:", text, re.DOTALL | re.IGNORECASE).group(1).strip()
+        insight = re.search(r"INSIGHT:\s*(.*?)CONFIDENCE:", text, re.DOTALL | re.IGNORECASE).group(1).strip()
+        confidence = re.search(r"CONFIDENCE:\s*(.*)", text, re.DOTALL | re.IGNORECASE).group(1).strip()
 
         return summary, recommendation, insight, confidence
     except:
@@ -695,9 +695,9 @@ if st.session_state.get("ok"):
 
         import re
         try:
-            i1 = re.search(r"INSIGHT_1:\s*(.*)", trend_ai).group(1)
-            i2 = re.search(r"INSIGHT_2:\s*(.*)", trend_ai).group(1)
-            i3 = re.search(r"INSIGHT_3:\s*(.*)", trend_ai).group(1)
+            i1 = re.search(r"INSIGHT_1:\s*(.*?)INSIGHT_2:", trend_ai, re.DOTALL | re.IGNORECASE).group(1).strip()
+            i2 = re.search(r"INSIGHT_2:\s*(.*?)INSIGHT_3:", trend_ai, re.DOTALL | re.IGNORECASE).group(1).strip()
+            i3 = re.search(r"INSIGHT_3:\s*(.*)", trend_ai, re.DOTALL | re.IGNORECASE).group(1).strip()
         except:
             i1 = i2 = i3 = trend_ai
 
